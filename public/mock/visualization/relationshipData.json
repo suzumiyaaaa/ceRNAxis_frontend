@@ -1,0 +1,224 @@
+{
+  "nodes": [
+    {
+      "id": "TP53",
+      "name": "TP53",
+      "type": "tumor_suppressor",
+      "expression": 2.1,
+      "description": "Tumor protein p53, guardian of the genome"
+    },
+    {
+      "id": "PTEN",
+      "name": "PTEN",
+      "type": "tumor_suppressor",
+      "expression": 3.5,
+      "description": "Phosphatase and tensin homolog"
+    },
+    {
+      "id": "MYC",
+      "name": "MYC",
+      "type": "oncogene",
+      "expression": 4.8,
+      "description": "MYC proto-oncogene, transcription factor"
+    },
+    {
+      "id": "EGFR",
+      "name": "EGFR",
+      "type": "oncogene",
+      "expression": 3.9,
+      "description": "Epidermal growth factor receptor"
+    },
+    {
+      "id": "KRAS",
+      "name": "KRAS",
+      "type": "oncogene",
+      "expression": 5.2,
+      "description": "KRAS proto-oncogene, GTPase"
+    },
+    {
+      "id": "BRCA1",
+      "name": "BRCA1",
+      "type": "dna_repair",
+      "expression": 2.8,
+      "description": "Breast cancer type 1 susceptibility protein"
+    },
+    {
+      "id": "BRCA2",
+      "name": "BRCA2",
+      "type": "dna_repair",
+      "expression": 2.5,
+      "description": "Breast cancer type 2 susceptibility protein"
+    },
+    {
+      "id": "AKT1",
+      "name": "AKT1",
+      "type": "signaling",
+      "expression": 3.7,
+      "description": "AKT serine/threonine kinase 1"
+    },
+    {
+      "id": "PIK3CA",
+      "name": "PIK3CA",
+      "type": "signaling",
+      "expression": 4.1,
+      "description": "Phosphatidylinositol-4,5-bisphosphate 3-kinase"
+    },
+    {
+      "id": "VEGFA",
+      "name": "VEGFA",
+      "type": "angiogenesis",
+      "expression": 3.2,
+      "description": "Vascular endothelial growth factor A"
+    },
+    {
+      "id": "CDK4",
+      "name": "CDK4",
+      "type": "cell_cycle",
+      "expression": 3.8,
+      "description": "Cyclin-dependent kinase 4"
+    },
+    {
+      "id": "CDK6",
+      "name": "CDK6",
+      "type": "cell_cycle",
+      "expression": 3.6,
+      "description": "Cyclin-dependent kinase 6"
+    },
+    {
+      "id": "RB1",
+      "name": "RB1",
+      "type": "tumor_suppressor",
+      "expression": 2.9,
+      "description": "Retinoblastoma protein"
+    },
+    {
+      "id": "NF1",
+      "name": "NF1",
+      "type": "tumor_suppressor",
+      "expression": 2.4,
+      "description": "Neurofibromin 1"
+    }
+  ],
+  "links": [
+    {
+      "source": "TP53",
+      "target": "PTEN",
+      "correlation": 0.82,
+      "strength": 0.82,
+      "type": "positive",
+      "description": "Strong positive correlation between tumor suppressors"
+    },
+    {
+      "source": "MYC",
+      "target": "EGFR",
+      "correlation": 0.76,
+      "strength": 0.76,
+      "type": "positive",
+      "description": "Oncogenes often co-expressed"
+    },
+    {
+      "source": "KRAS",
+      "target": "PIK3CA",
+      "correlation": 0.68,
+      "strength": 0.68,
+      "type": "positive",
+      "description": "Components of same signaling pathway"
+    },
+    {
+      "source": "BRCA1",
+      "target": "BRCA2",
+      "correlation": 0.91,
+      "strength": 0.91,
+      "type": "positive",
+      "description": "DNA repair proteins work together"
+    },
+    {
+      "source": "AKT1",
+      "target": "PIK3CA",
+      "correlation": 0.73,
+      "strength": 0.73,
+      "type": "positive",
+      "description": "PI3K/AKT signaling pathway"
+    },
+    {
+      "source": "CDK4",
+      "target": "CDK6",
+      "correlation": 0.85,
+      "strength": 0.85,
+      "type": "positive",
+      "description": "Cyclin-dependent kinases with similar function"
+    },
+    {
+      "source": "TP53",
+      "target": "MYC",
+      "correlation": -0.62,
+      "strength": 0.62,
+      "type": "negative",
+      "description": "Tumor suppressor negatively regulates oncogene"
+    },
+    {
+      "source": "PTEN",
+      "target": "AKT1",
+      "correlation": -0.58,
+      "strength": 0.58,
+      "type": "negative",
+      "description": "PTEN inhibits AKT signaling"
+    },
+    {
+      "source": "RB1",
+      "target": "CDK4",
+      "correlation": -0.53,
+      "strength": 0.53,
+      "type": "negative",
+      "description": "RB1 inhibited by CDK4 phosphorylation"
+    },
+    {
+      "source": "VEGFA",
+      "target": "TP53",
+      "correlation": -0.47,
+      "strength": 0.47,
+      "type": "negative",
+      "description": "Angiogenesis factor negatively correlated with p53"
+    },
+    {
+      "source": "EGFR",
+      "target": "BRCA1",
+      "correlation": -0.41,
+      "strength": 0.41,
+      "type": "negative",
+      "description": "Weak negative correlation"
+    },
+    {
+      "source": "NF1",
+      "target": "KRAS",
+      "correlation": -0.65,
+      "strength": 0.65,
+      "type": "negative",
+      "description": "NF1 negatively regulates RAS pathway"
+    },
+    {
+      "source": "MYC",
+      "target": "CDK4",
+      "correlation": 0.59,
+      "strength": 0.59,
+      "type": "positive",
+      "description": "MYC promotes cell cycle progression"
+    },
+    {
+      "source": "VEGFA",
+      "target": "PIK3CA",
+      "correlation": 0.52,
+      "strength": 0.52,
+      "type": "positive",
+      "description": "VEGF signaling through PI3K pathway"
+    },
+    {
+      "source": "TP53",
+      "target": "CDK4",
+      "correlation": -0.48,
+      "strength": 0.48,
+      "type": "negative",
+      "description": "p53 regulates cell cycle inhibitors"
+    }
+  ]
+}

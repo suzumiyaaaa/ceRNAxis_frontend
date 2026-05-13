@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+    <!-- 定义样式 -->
+    <defs>
+        <!-- 渐变背景 -->
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#f0f8ff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e6f2ff;stop-opacity:1" />
+        </linearGradient>
+        <!-- 主蓝色渐变 -->
+        <linearGradient id="mainBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1a73e8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0d66d0;stop-opacity:1" />
+        </linearGradient>
+        <!-- 次要蓝色 -->
+        <linearGradient id="secondaryBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4285f4;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3367d6;stop-opacity:1" />
+        </linearGradient>
+        <!-- 浅蓝 -->
+        <linearGradient id="lightBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#8ab4f8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7baaf7;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- 背景 -->
+    <rect width="900" height="600" fill="url(#bgGradient)" rx="10" ry="10" />
+
+    <!-- 标题区域 -->
+    <rect x="50" y="30" width="800" height="80" fill="url(#mainBlue)" rx="8" ry="8" />
+    <text x="450" y="75" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+        ceRNA Network Database Framework
+    </text>
+    <text x="450" y="100" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">
+        Competing Endogenous RNA Interaction Analysis Platform
+    </text>
+
+    <!-- 核心模块：数据来源 (Data Sources) -->
+    <rect x="50" y="140" width="200" height="180" fill="url(#secondaryBlue)" rx="6" ry="6" />
+    <text x="150" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+        Data Sources
+    </text>
+    <text x="150" y="200" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • RNA-seq Data
+    </text>
+    <text x="150" y="225" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • miRNA Target Databases
+    </text>
+    <text x="150" y="250" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • TCGA/GTEx Datasets
+    </text>
+    <text x="150" y="275" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Experimental Validation
+    </text>
+    <text x="150" y="300" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Public Repositories
+    </text>
+
+    <!-- 核心模块：核心功能 (Core Functions) -->
+    <rect x="270" y="140" width="200" height="180" fill="url(#secondaryBlue)" rx="6" ry="6" />
+    <text x="370" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+        Core Functions
+    </text>
+    <text x="370" y="200" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • ceRNA Prediction
+    </text>
+    <text x="370" y="225" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Network Construction
+    </text>
+    <text x="370" y="250" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Interaction Filtering
+    </text>
+    <text x="370" y="275" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Functional Annotation
+    </text>
+    <text x="370" y="300" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Data Integration
+    </text>
+
+    <!-- 核心模块：分析工具 (Analysis Tools) -->
+    <rect x="490" y="140" width="200" height="180" fill="url(#secondaryBlue)" rx="6" ry="6" />
+    <text x="590" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+        Analysis Tools
+    </text>
+    <text x="590" y="200" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Differential Expression
+    </text>
+    <text x="590" y="225" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Survival Analysis
+    </text>
+    <text x="590" y="250" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Enrichment Analysis
+    </text>
+    <text x="590" y="275" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Module Identification
+    </text>
+    <text x="590" y="300" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Correlation Analysis
+    </text>
+
+    <!-- 核心模块：可视化 (Visualization) -->
+    <rect x="710" y="140" width="140" height="180" fill="url(#secondaryBlue)" rx="6" ry="6" />
+    <text x="780" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+        Visualization
+    </text>
+    <text x="780" y="200" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Network Graph
+    </text>
+    <text x="780" y="225" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Heatmap
+    </text>
+    <text x="780" y="250" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Circular Plot
+    </text>
+    <text x="780" y="275" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Volcano Plot
+    </text>
+    <text x="780" y="300" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+        • Survival Curve
+    </text>
+
+    <!-- 应用场景 (Application Scenarios) -->
+    <rect x="50" y="350" width="800" height="180" fill="url(#lightBlue)" rx="6" ry="6" />
+    <text x="450" y="380" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+        Application Scenarios
+    </text>
+    
+    <!-- 应用场景内容 -->
+    <text x="100" y="415" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Cancer Biomarker Identification
+    </text>
+    <text x="100" y="440" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • ceRNA Regulatory Mechanism Study
+    </text>
+    <text x="100" y="465" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Drug Target Discovery
+    </text>
+    <text x="100" y="490" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Disease Progression Analysis
+    </text>
+    
+    <text x="500" y="415" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Precision Medicine Research
+    </text>
+    <text x="500" y="440" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Non-coding RNA Functional Analysis
+    </text>
+    <text x="500" y="465" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Prognostic Signature Development
+    </text>
+    <text x="500" y="490" font-family="Arial, sans-serif" font-size="14" fill="white">
+        • Multi-omics Data Integration
+    </text>
+
+    <!-- 连接线：增强视觉层次 -->
+    <line x1="250" y1="230" x2="270" y2="230" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="470" y1="230" x2="490" y2="230" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="690" y1="230" x2="710" y2="230" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    
+    <line x1="150" y1="320" x2="150" y2="350" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="370" y1="320" x2="370" y2="350" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="590" y1="320" x2="590" y2="350" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="780" y1="320" x2="780" y2="350" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3" />
+
+    <!-- 页脚信息 -->
+    
+</svg>

@@ -1,0 +1,202 @@
+{
+  "nodes": [
+    {
+      "id": "lncRNA1",
+      "type": "lncRNA",
+      "name": "LINC00152",
+      "expression": 2.5,
+      "description": "Long intergenic non-protein coding RNA 152"
+    },
+    {
+      "id": "lncRNA2",
+      "type": "lncRNA",
+      "name": "MALAT1",
+      "expression": 3.2,
+      "description": "Metastasis associated lung adenocarcinoma transcript 1"
+    },
+    {
+      "id": "lncRNA3",
+      "type": "lncRNA",
+      "name": "HOTAIR",
+      "expression": 1.8,
+      "description": "HOX transcript antisense RNA"
+    },
+    {
+      "id": "circRNA1",
+      "type": "circRNA",
+      "name": "hsa_circ_0001946",
+      "expression": 4.1,
+      "description": "Circular RNA derived from CDR1as"
+    },
+    {
+      "id": "circRNA2",
+      "type": "circRNA",
+      "name": "hsa_circ_0001430",
+      "expression": 2.9,
+      "description": "Circular RNA associated with cancer"
+    },
+    {
+      "id": "miRNA1",
+      "type": "miRNA",
+      "name": "miR-21",
+      "expression": 5.0,
+      "description": "OncomiR, promotes tumor growth"
+    },
+    {
+      "id": "miRNA2",
+      "type": "miRNA",
+      "name": "miR-34a",
+      "expression": 3.7,
+      "description": "Tumor suppressor miRNA"
+    },
+    {
+      "id": "miRNA3",
+      "type": "miRNA",
+      "name": "miR-155",
+      "expression": 4.3,
+      "description": "OncomiR, involved in immune response"
+    },
+    {
+      "id": "mRNA1",
+      "type": "mRNA",
+      "name": "TP53",
+      "expression": 2.1,
+      "description": "Tumor protein p53, tumor suppressor"
+    },
+    {
+      "id": "mRNA2",
+      "type": "mRNA",
+      "name": "PTEN",
+      "expression": 3.5,
+      "description": "Phosphatase and tensin homolog, tumor suppressor"
+    },
+    {
+      "id": "mRNA3",
+      "type": "mRNA",
+      "name": "MYC",
+      "expression": 4.8,
+      "description": "MYC proto-oncogene"
+    },
+    {
+      "id": "mRNA4",
+      "type": "mRNA",
+      "name": "EGFR",
+      "expression": 3.9,
+      "description": "Epidermal growth factor receptor"
+    },
+    {
+      "id": "mRNA5",
+      "type": "mRNA",
+      "name": "KRAS",
+      "expression": 5.2,
+      "description": "KRAS proto-oncogene"
+    },
+    {
+      "id": "mRNA6",
+      "type": "mRNA",
+      "name": "VEGFA",
+      "expression": 3.2,
+      "description": "Vascular endothelial growth factor A"
+    }
+  ],
+  "links": [
+    {
+      "source": "lncRNA1",
+      "target": "miRNA1",
+      "type": "sponge",
+      "strength": 0.8,
+      "description": "LINC00152 sponges miR-21"
+    },
+    {
+      "source": "lncRNA1",
+      "target": "miRNA2",
+      "type": "sponge",
+      "strength": 0.6,
+      "description": "LINC00152 sponges miR-34a"
+    },
+    {
+      "source": "lncRNA2",
+      "target": "miRNA1",
+      "type": "sponge",
+      "strength": 0.7,
+      "description": "MALAT1 sponges miR-21"
+    },
+    {
+      "source": "lncRNA3",
+      "target": "miRNA3",
+      "type": "sponge",
+      "strength": 0.9,
+      "description": "HOTAIR sponges miR-155"
+    },
+    {
+      "source": "circRNA1",
+      "target": "miRNA2",
+      "type": "sponge",
+      "strength": 0.5,
+      "description": "hsa_circ_0001946 sponges miR-34a"
+    },
+    {
+      "source": "circRNA2",
+      "target": "miRNA3",
+      "type": "sponge",
+      "strength": 0.7,
+      "description": "hsa_circ_0001430 sponges miR-155"
+    },
+    {
+      "source": "miRNA1",
+      "target": "mRNA1",
+      "type": "target",
+      "strength": 0.9,
+      "description": "miR-21 targets TP53"
+    },
+    {
+      "source": "miRNA1",
+      "target": "mRNA2",
+      "type": "target",
+      "strength": 0.8,
+      "description": "miR-21 targets PTEN"
+    },
+    {
+      "source": "miRNA2",
+      "target": "mRNA3",
+      "type": "target",
+      "strength": 0.7,
+      "description": "miR-34a targets MYC"
+    },
+    {
+      "source": "miRNA3",
+      "target": "mRNA4",
+      "type": "target",
+      "strength": 0.6,
+      "description": "miR-155 targets EGFR"
+    },
+    {
+      "source": "miRNA3",
+      "target": "mRNA1",
+      "type": "target",
+      "strength": 0.5,
+      "description": "miR-155 targets TP53"
+    },
+    {
+      "source": "miRNA1",
+      "target": "mRNA5",
+      "type": "target",
+      "strength": 0.7,
+      "description": "miR-21 targets KRAS"
+    },
+    {
+      "source": "miRNA2",
+      "target": "mRNA6",
+      "type": "target",
+      "strength": 0.6,
+      "description": "miR-34a targets VEGFA"
+    },
+    {
+      "source": "circRNA1",
+      "target": "miRNA1",
+      "type": "sponge",
+      "strength": 0.4,
+      "description": "hsa_circ_0001946 weakly sponges miR-21"
+    }
+  ]
+}

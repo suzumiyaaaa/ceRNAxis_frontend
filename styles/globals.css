@@ -1,0 +1,70 @@
+/* /* 重置样式（保留通用逻辑，调整细节） 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ 全局主题变量 
+:root {
+  --primary-color: #2563eb; /* 主色（示例：蓝色） 
+  --secondary-color: #f97316; /* 辅助色（示例：橙色） 
+  --text-primary: #1e293b; /* 主要文字色 
+  --text-secondary: #64748b; /* 次要文字色 
+  --bg-main: #ffffff; /* 主背景 
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+}
+
+ 全局通用样式 
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; /* 字体 
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  line-height: 1.6;
+}
+
+ 全局类名（新增通用类） 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gap-md);
+} */
+
+html,
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --header-height: 64px;
+  --footer-height: 222px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.venntooltip {
+  position: absolute;
+  text-align: center;
+  width: 128px;
+  height: 16px;
+  background: #333;
+  color: #ddd;
+  padding: 2px;
+  padding-bottom: 10px;
+  border: 0px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none; /* 禁止tooltip响应鼠标事件 */
+  transform: translate(0, -25%); /* 将 tooltip 调整到指针上方 */
+}
