@@ -5,7 +5,12 @@
 import { Card, Typography, Row, Col, Space, Tag, Divider } from "antd"
 import { Box } from "@mui/system"
 import { ApartmentOutlined } from "@ant-design/icons"
-import PathSearchGraph from "@/components/features/visualization/PathSearchGraph"
+import dynamic from "next/dynamic"
+
+const PathSearchGraph = dynamic(
+  () => import("@/components/features/visualization/PathSearchGraph"),
+  { ssr: false }
+)
 
 const { Title, Paragraph, Text } = Typography
 

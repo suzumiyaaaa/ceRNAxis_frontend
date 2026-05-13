@@ -1,11 +1,28 @@
 import { useState } from "react"
 import { Tabs, Card, Row, Col, Space, Typography, Button, Select } from "antd"
 import { Box } from "@mui/system"
-import NetworkTopologyGraph from "@/components/features/visualization/NetworkTopologyGraph"
-import NodeRelationshipGraph from "@/components/features/visualization/NodeRelationshipGraph"
-import ExpressionHeatmap from "@/components/features/visualization/ExpressionHeatmap"
-import CeRNAInteractionGraph from "@/components/features/visualization/CeRNAInteractionGraph"
-import PathSearchGraph from "@/components/features/visualization/PathSearchGraph"
+import dynamic from "next/dynamic"
+
+const NetworkTopologyGraph = dynamic(
+  () => import("@/components/features/visualization/NetworkTopologyGraph"),
+  { ssr: false }
+)
+const NodeRelationshipGraph = dynamic(
+  () => import("@/components/features/visualization/NodeRelationshipGraph"),
+  { ssr: false }
+)
+const ExpressionHeatmap = dynamic(
+  () => import("@/components/features/visualization/ExpressionHeatmap"),
+  { ssr: false }
+)
+const CeRNAInteractionGraph = dynamic(
+  () => import("@/components/features/visualization/CeRNAInteractionGraph"),
+  { ssr: false }
+)
+const PathSearchGraph = dynamic(
+  () => import("@/components/features/visualization/PathSearchGraph"),
+  { ssr: false }
+)
 
 const { Title, Paragraph, Text } = Typography
 
