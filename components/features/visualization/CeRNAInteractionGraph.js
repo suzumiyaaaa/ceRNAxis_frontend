@@ -4,12 +4,16 @@
  * 用于展示ceRNA-miRNA相互作用网络
  */
 import { useState, useEffect, useRef, useCallback } from 'react'
+import cytoscape from 'cytoscape'
 import CytoscapeComponent from 'react-cytoscapejs'  // Cytoscape.js React封装
+import cytoscapeSvg from 'cytoscape-svg'
 import { Box } from '@mui/system'                  // MUI系统样式组件
 import { Card, Row, Col, Input, Button, Typography, Space, List, Tag, Spin, Alert } from 'antd'  // Ant Design UI组件
-import { SearchOutlined, ExpandOutlined, ClearOutlined } from '@ant-design/icons'  // 图标
+import { SearchOutlined, ExpandOutlined, ClearOutlined, FileImageOutlined, FileTextOutlined } from '@ant-design/icons'  // 图标
 import { searchNodes, fetchFirstDegreeNeighbors, expandNode } from '@/services/ceRNAApi'  // API服务
 import VisualizationContainer from '@/components/ui/container/VisualizationContainer'  // 可视化容器组件
+
+cytoscape.use(cytoscapeSvg)
 
 const { Text } = Typography  // Ant Design文本组件
 
@@ -914,6 +918,84 @@ const CeRNAInteractionGraph = () => {
 
 
   /**
+   * 导出为PNG格式
+   * 使用Cytoscape.js内置的png()方法将当前网络图导出为PNG图片并触发下载
+   */
+  const handleExportPNG = () => {
+    if (!cyRef.current || cyRef.current.destroyed()) return
+    try {
+      const pngData = cyRef.current.png({
+        output: 'blob',
+        bg: '#ffffff',
+        full: true
+      })
+      const url = URL.createObjectURL(pngData)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'ceRNA_network.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      console.error('Failed to export PNG:', err)
+      setError('Failed to export PNG: ' + err.message)
+    }
+  }
+
+  /**
+   * 导出为SVG格式
+   * 使用cytoscape-svg扩展的svg()方法将当前网络图导出为SVG文件并触发下载
+   */
+  const handleExportSVG = () => {
+    if (!cyRef.current || cyRef.current.destroyed()) return
+    const cy = cyRef.current
+
+    // 保存并清除bypass styles（cy.svg()与bypass styles不兼容）
+    const savedNodeStyles = []
+    cy.nodes().forEach(node => {
+      savedNodeStyles.push({ node, styles: { opacity: node.style('opacity') } })
+      node.removeStyle()
+    })
+    const savedEdgeStyles = []
+    cy.edges().forEach(edge => {
+      savedEdgeStyles.push({ edge, styles: {
+        'line-color': edge.style('line-color'),
+        'target-arrow-color': edge.style('target-arrow-color'),
+        'width': edge.style('width'),
+        'opacity': edge.style('opacity')
+      }})
+      edge.removeStyle()
+    })
+
+    try {
+      const svgString = cy.svg({ full: true, scale: 2 })
+      const blob = new Blob([svgString], { type: 'image/svg+xml' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'ceRNA_network.svg'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      console.error('Failed to export SVG:', err)
+      setError('Failed to export SVG: ' + err.message)
+    }
+
+    // 恢复bypass styles
+    savedNodeStyles.forEach(({ node, styles }) => {
+      if (styles.opacity !== undefined) node.style('opacity', styles.opacity)
+    })
+    savedEdgeStyles.forEach(({ edge, styles }) => {
+      Object.entries(styles).forEach(([key, val]) => {
+        if (val !== undefined) edge.style(key, val)
+      })
+    })
+  }
+
+  /**
    * 处理搜索结果点击 - 点击搜索结果中的节点时加载其邻居
    * @param {Object} node - 搜索结果节点对象
    */
@@ -952,7 +1034,7 @@ const CeRNAInteractionGraph = () => {
     const elementsChanged = elementsHashRef.current !== elementsHash
     elementsHashRef.current = elementsHash
 
-    if (cyRef.current && elementsChanged) {
+    if (cyRef.current && !cyRef.current.destroyed() && elementsChanged) {
       console.log('Cytoscape instance available, nodes:', cyRef.current.nodes().length, 'edges:', cyRef.current.edges().length)
       console.log('Container dimensions after update:', cyRef.current.container().offsetWidth, 'x', cyRef.current.container().offsetHeight)
 
@@ -1097,20 +1179,15 @@ const CeRNAInteractionGraph = () => {
     return () => {
       // 清理扩展超时
       if (expandTimeoutRef.current) {
-        console.log('Cleaning up expand timeout on unmount')
         clearTimeout(expandTimeoutRef.current)
       }
       // 清理删除超时
       if (deleteTimeoutRef.current) {
-        console.log('Cleaning up delete timeout on unmount')
         clearTimeout(deleteTimeoutRef.current)
       }
-      // 清理Cytoscape实例
-      if (cyRef.current) {
-        console.log('Destroying Cytoscape instance on unmount')
-        cyRef.current.destroy()
-        cyRef.current = null
-      }
+      // 注意：不手动销毁Cytoscape实例，由react-cytoscapejs管理生命周期
+      // 避免double-destroy导致的"Cannot read properties of null (reading 'notify')"错误
+      cyRef.current = null
     }
   }, [])
 
@@ -1145,6 +1222,14 @@ const CeRNAInteractionGraph = () => {
 
                 <Button icon={<ClearOutlined />} onClick={handleReset} danger>
                   Reset
+                </Button>
+
+                <Button icon={<FileImageOutlined />} onClick={handleExportPNG} disabled={nodeCount === 0}>
+                  Export PNG
+                </Button>
+
+                <Button icon={<FileTextOutlined />} onClick={handleExportSVG} disabled={nodeCount === 0}>
+                  Export SVG
                 </Button>
 
                 <Button

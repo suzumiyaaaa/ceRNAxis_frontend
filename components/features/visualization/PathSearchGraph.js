@@ -192,34 +192,48 @@ const PathSearchGraph = () => {
     return elements
   }, [])
 
-  // 搜索节点建议（防抖）
-  const handleSourceSearch = useCallback(async (value) => {
+  // 搜索节点建议：输入变化时直接更新 state
+  const handleSourceSearch = useCallback((value) => {
     setSourceName(value)
-    if (value.length < 2) {
-      setSourceSuggestions([])
-      return
-    }
-    try {
-      const results = await searchNodes({ search_key: value })
-      setSourceSuggestions(results.slice(0, 10))
-    } catch {
-      setSourceSuggestions([])
-    }
   }, [])
 
-  const handleTargetSearch = useCallback(async (value) => {
+  const handleTargetSearch = useCallback((value) => {
     setTargetName(value)
-    if (value.length < 2) {
+  }, [])
+
+  // 防抖获取建议：监听 sourceName 变化，300ms 后调用 API
+  useEffect(() => {
+    if (sourceName.length < 2) {
+      setSourceSuggestions([])
+      return
+    }
+    const timer = setTimeout(async () => {
+      try {
+        const results = await searchNodes({ search_key: sourceName })
+        setSourceSuggestions(results.slice(0, 10))
+      } catch {
+        setSourceSuggestions([])
+      }
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [sourceName])
+
+  // 防抖获取建议：监听 targetName 变化，300ms 后调用 API
+  useEffect(() => {
+    if (targetName.length < 2) {
       setTargetSuggestions([])
       return
     }
-    try {
-      const results = await searchNodes({ search_key: value })
-      setTargetSuggestions(results.slice(0, 10))
-    } catch {
-      setTargetSuggestions([])
-    }
-  }, [])
+    const timer = setTimeout(async () => {
+      try {
+        const results = await searchNodes({ search_key: targetName })
+        setTargetSuggestions(results.slice(0, 10))
+      } catch {
+        setTargetSuggestions([])
+      }
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [targetName])
 
   // 执行通路搜索
   const handleSearch = async () => {
@@ -233,6 +247,8 @@ const PathSearchGraph = () => {
     setSelectedNode(null)
     setSelectedEdge(null)
     setActivePathIndex(-1)
+    setSourceSuggestions([])
+    setTargetSuggestions([])
 
     try {
       const result = await fetchPathSearch({
@@ -540,6 +556,44 @@ const PathSearchGraph = () => {
     setFilterType('all')
   }
 
+  // 删除节点
+  const handleDeleteNode = (nodeId) => {
+    if (!nodeId) return
+
+    // 从 Cytoscape 实例中移除节点
+    if (cyRef.current && !cyRef.current.destroyed()) {
+      const node = cyRef.current.getElementById(nodeId)
+      if (node) node.remove()
+    }
+
+    // 更新 cyElements 状态
+    setCyElements(prev => prev.filter(el => {
+      if (el.data.id === nodeId && !el.data.source) return false
+      if (el.data.source === nodeId || el.data.target === nodeId) return false
+      return true
+    }))
+
+    // 更新 paths：移除包含已删除节点的通路，并分配颜色
+    setPaths(prev => prev
+      .filter(p => !p.nodes.includes(nodeId))
+      .map((p, idx) => ({
+        ...p,
+        color: PATH_COLORS[idx % PATH_COLORS.length]
+      }))
+    )
+
+    // 更新 statistics
+    setStatistics(prev => {
+      if (!prev) return null
+      const newTotalPaths = paths.filter(p => !p.nodes.includes(nodeId)).length
+      return { ...prev, total_paths: newTotalPaths }
+    })
+
+    // 清除选中状态
+    setSelectedNode(null)
+    setSelectedEdge(null)
+  }
+
   // 交换源和目标
   const handleSwap = () => {
     setSourceName(targetName)
@@ -778,7 +832,7 @@ const PathSearchGraph = () => {
                   px: 2, py: 1.5, fontSize: 12, border: '1px solid #d1d5db',
                   zIndex: 1000, maxWidth: 280
                 }}>
-                  <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+                  <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
                     <Tag color={NODE_TYPE_COLORS[selectedNode.type] || '#6b7280'}>
                       {selectedNode.type}
                     </Tag>
@@ -786,6 +840,17 @@ const PathSearchGraph = () => {
                   </div>
                   <div><strong>ID:</strong> {selectedNode.id}</div>
                   <div><strong>Name:</strong> {selectedNode.name || selectedNode.id}</div>
+                  <div style={{ marginTop: 8 }}>
+                    <Space>
+                      <Button
+                        size="small"
+                        onClick={() => handleDeleteNode(selectedNode.id)}
+                        danger
+                      >
+                        Delete Node
+                      </Button>
+                    </Space>
+                  </div>
                 </Box>
               )}
 

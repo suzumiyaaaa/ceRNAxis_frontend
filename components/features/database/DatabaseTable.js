@@ -41,7 +41,7 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
             title: 'miRNA',
             dataIndex: 'mirna',
             key: 'mirna',
-            width: 150,
+            width: 180,
             sorter: (a, b) => a.mirna?.localeCompare(b.mirna || '') || 0,
             render: (text) => (
                 <Text strong style={{ color: '#1890ff' }}>
@@ -54,7 +54,7 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
             title: 'ceRNA',
             dataIndex: 'cerna',
             key: 'cerna',
-            width: 150,
+            width: 200,
             sorter: (a, b) => a.cerna?.localeCompare(b.cerna || '') || 0,
             render: (text) => (
                 <Tooltip title={text}>
@@ -76,7 +76,7 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
             ),
             dataIndex: 'species',
             key: 'species',
-            width: 100,
+            width: 140,
             render: (text) => {
                 let color = 'green'
                 if (text === 'Homo sapiens') color = 'green'
@@ -88,7 +88,7 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
             title: 'Database',
             dataIndex: 'database',
             key: 'database',
-            width: 200,
+            width: 260,
             render: (text) => <MultiTagList value={text} color="geekblue" />
         },
         {
@@ -96,7 +96,7 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
             title: 'ceRNA Type',
             dataIndex: 'cerna_type',
             key: 'cerna_type',
-            width: 180,
+            width: 220,
             render: (text) => {
                 let color = 'default'
 
@@ -116,88 +116,83 @@ const DatabaseTable = ({ data, total, page, pageSize, onPageChange, onRowSelecti
                 )
             }
         },
-        {
-            // Disease列：显示相关疾病，为空时显示"Not specified"
-            title: 'Disease',
-            dataIndex: 'disease',
-            key: 'disease',
-            width: 150,
-            render: (text) => {
-                if (!text || text === '') return <Text type="secondary">Not specified</Text>
-                return <Tag color="magenta">{text}</Tag>
-            }
-        },
-        {
-            // Binding Score列：显示结合分数，带彩色进度条
-            title: 'Binding Score',
-            dataIndex: 'binding_score',
-            key: 'binding_score',
-            width: 130,
-            sorter: (a, b) => (a.binding_score || 0) - (b.binding_score || 0),
-            render: (text) => {
-                // 数据转换：确保为数字类型
-                const value = typeof text === 'number' ? text : parseFloat(text) || 0;
-                // 显示格式化：保留一位小数
-                const displayValue = typeof value === 'number' && !isNaN(value) ? value.toFixed(1) : '0.0';
-                // 计算进度条宽度百分比（限制在0-100之间）
-                const widthPercent = Math.min(Math.max(value, 0), 100);
-
-                return (
-                    <Box>
-                        <Text strong>{displayValue}</Text>
-                        {/* 进度条容器 */}
-                        <Box sx={{ width: '100%', height: 4, backgroundColor: '#f0f0f0', mt: 0.5 }}>
-                            {/* 进度条：根据分数值显示不同颜色 */}
-                            <Box
-                                sx={{
-                                    width: `${widthPercent}%`,
-                                    height: '100%',
-                                    backgroundColor: value > 80 ? '#52c41a' : value > 60 ? '#faad14' : '#f5222d'
-                                }}
-                            />
-                        </Box>
-                    </Box>
-                )
-            }
-        },
-        {
-            // Regulation列：显示调控类型，支持过滤器
-            title: 'Regulation',
-            dataIndex: 'regulate_type',
-            key: 'regulate_type',
-            width: 100,
-            filters: [
-                { text: 'upregulation', value: 'upregulation' },
-                { text: 'downregulation', value: 'downregulation' },
-                { text: 'unknown', value: 'unknown' }
-            ],
-            onFilter: (value, record) => record.regulate_type === value,
-            render: (text) => {
-                let color = 'default'
-                if (text === 'upregulation') color = 'green'
-                if (text === 'downregulation') color = 'red'
-                if (text === 'unknown') color = 'gray'
-                return <Tag color={color}>{text}</Tag>
-            }
-        },
-        {
-            // Reference列：显示参考文献信息，带tooltip提示
-            title: 'Reference',
-            dataIndex: 'reference',
-            key: 'reference',
-            width: 120,
-            render: (text) => (
-                <Tooltip title={text}>
-                    <Text type="secondary" style={{ fontSize: '12px' }}>
-                        {text}
-                    </Text>
-                </Tooltip>
-            )
-        }
+        // Disease列（已禁用）
+        // {
+        //     title: 'Disease',
+        //     dataIndex: 'disease',
+        //     key: 'disease',
+        //     width: 150,
+        //     render: (text) => {
+        //         if (!text || text === '') return <Text type="secondary">Not specified</Text>
+        //         return <Tag color="magenta">{text}</Tag>
+        //     }
+        // },
+        // Binding Score列（已禁用）
+        // {
+        //     title: 'Binding Score',
+        //     dataIndex: 'binding_score',
+        //     key: 'binding_score',
+        //     width: 130,
+        //     sorter: (a, b) => (a.binding_score || 0) - (b.binding_score || 0),
+        //     render: (text) => {
+        //         const value = typeof text === 'number' ? text : parseFloat(text) || 0;
+        //         const displayValue = typeof value === 'number' && !isNaN(value) ? value.toFixed(1) : '0.0';
+        //         const widthPercent = Math.min(Math.max(value, 0), 100);
+        //         return (
+        //             <Box>
+        //                 <Text strong>{displayValue}</Text>
+        //                 <Box sx={{ width: '100%', height: 4, backgroundColor: '#f0f0f0', mt: 0.5 }}>
+        //                     <Box
+        //                         sx={{
+        //                             width: `${widthPercent}%`,
+        //                             height: '100%',
+        //                             backgroundColor: value > 80 ? '#52c41a' : value > 60 ? '#faad14' : '#f5222d'
+        //                         }}
+        //                     />
+        //                 </Box>
+        //             </Box>
+        //         )
+        //     }
+        // },
+        // Regulation列（已禁用）
+        // {
+        //     title: 'Regulation',
+        //     dataIndex: 'regulate_type',
+        //     key: 'regulate_type',
+        //     width: 100,
+        //     filters: [
+        //         { text: 'upregulation', value: 'upregulation' },
+        //         { text: 'downregulation', value: 'downregulation' },
+        //         { text: 'unknown', value: 'unknown' }
+        //     ],
+        //     onFilter: (value, record) => record.regulate_type === value,
+        //     render: (text) => {
+        //         let color = 'default'
+        //         if (text === 'upregulation') color = 'green'
+        //         if (text === 'downregulation') color = 'red'
+        //         if (text === 'unknown') color = 'gray'
+        //         return <Tag color={color}>{text}</Tag>
+        //     }
+        // },
+        // Reference列（已禁用）
+        // {
+        //     title: 'Reference',
+        //     dataIndex: 'reference',
+        //     key: 'reference',
+        //     width: 120,
+        //     render: (text) => (
+        //         <Tooltip title={text}>
+        //             <Text type="secondary" style={{ fontSize: '12px' }}>
+        //                 {text}
+        //             </Text>
+        //         </Tooltip>
+        //     )
+        // }
     ]
 
     // 行选择配置
     const rowSelection = {
+        columnWidth: 40,
         selectedRowKeys,
         onChange: handleSelectionChange,
         selections: [

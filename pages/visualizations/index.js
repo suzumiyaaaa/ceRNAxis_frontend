@@ -3,18 +3,6 @@ import { Tabs, Card, Row, Col, Space, Typography, Button, Select } from "antd"
 import { Box } from "@mui/system"
 import dynamic from "next/dynamic"
 
-const NetworkTopologyGraph = dynamic(
-  () => import("@/components/features/visualization/NetworkTopologyGraph"),
-  { ssr: false }
-)
-const NodeRelationshipGraph = dynamic(
-  () => import("@/components/features/visualization/NodeRelationshipGraph"),
-  { ssr: false }
-)
-const ExpressionHeatmap = dynamic(
-  () => import("@/components/features/visualization/ExpressionHeatmap"),
-  { ssr: false }
-)
 const CeRNAInteractionGraph = dynamic(
   () => import("@/components/features/visualization/CeRNAInteractionGraph"),
   { ssr: false }
@@ -23,38 +11,53 @@ const PathSearchGraph = dynamic(
   () => import("@/components/features/visualization/PathSearchGraph"),
   { ssr: false }
 )
+// Network Topology Graph（已禁用）
+// const NetworkTopologyGraph = dynamic(
+//   () => import("@/components/features/visualization/NetworkTopologyGraph"),
+//   { ssr: false }
+// )
+// Node Relationship Graph（已禁用）
+// const NodeRelationshipGraph = dynamic(
+//   () => import("@/components/features/visualization/NodeRelationshipGraph"),
+//   { ssr: false }
+// )
+// Expression Heatmap（已禁用）
+// const ExpressionHeatmap = dynamic(
+//   () => import("@/components/features/visualization/ExpressionHeatmap"),
+//   { ssr: false }
+// )
 
 const { Title, Paragraph, Text } = Typography
 
 const CeRNAVisualizationPage = () => {
     const [activeTab, setActiveTab] = useState("interaction")
-    const [loading, setLoading] = useState(false)
-    const [selectedGene, setSelectedGene] = useState(null)
+    // const [loading, setLoading] = useState(false)
+    // const [selectedGene, setSelectedGene] = useState(null)
 
-    // 模拟数据状态（可以扩展到从API加载）
-    const [networkData, setNetworkData] = useState(null)
-    const [relationshipData, setRelationshipData] = useState(null)
-    const [heatmapData, setHeatmapData] = useState(null)
+    // 模拟数据状态（已禁用）
+    // const [networkData, setNetworkData] = useState(null)
+    // const [relationshipData, setRelationshipData] = useState(null)
+    // const [heatmapData, setHeatmapData] = useState(null)
 
-    // 基因列表（从模拟数据中提取）
-    const geneList = [
-        { value: "TP53", label: "TP53 (Tumor Suppressor Gene)" },
-        { value: "PTEN", label: "PTEN (Tumor Suppressor Gene)" },
-        { value: "MYC", label: "MYC (Oncogene)" },
-        { value: "EGFR", label: "EGFR (Oncogene)" },
-        { value: "KRAS", label: "KRAS (Oncogene)" },
-        { value: "BRCA1", label: "BRCA1 (DNA Repair)" },
-        { value: "BRCA2", label: "BRCA2 (DNA Repair)" },
-        { value: "AKT1", label: "AKT1 (Signaling Pathway)" },
-        { value: "PIK3CA", label: "PIK3CA (Signaling Pathway)" },
-        { value: "VEGFA", label: "VEGFA (Angiogenesis)" },
-        { value: "LINC00152", label: "LINC00152 (lncRNA)" },
-        { value: "MALAT1", label: "MALAT1 (lncRNA)" },
-        { value: "HOTAIR", label: "HOTAIR (lncRNA)" },
-        { value: "miR-21", label: "miR-21 (miRNA)" },
-        { value: "miR-34a", label: "miR-34a (miRNA)" },
-        { value: "miR-155", label: "miR-155 (miRNA)" }
-    ]
+    // 基因列表（已禁用）
+    // const geneList = [
+    //     { value: "TP53", label: "TP53 (Tumor Suppressor Gene)" },
+    //     { value: "PTEN", label: "PTEN (Tumor Suppressor Gene)" },
+    //     { value: "MYC", label: "MYC (Oncogene)" },
+    //     { value: "EGFR", label: "EGFR (Oncogene)" },
+    //     { value: "KRAS", label: "KRAS (Oncogene)" },
+    //     { value: "BRCA1", label: "BRCA1 (DNA Repair)" },
+    //     { value: "BRCA2", label: "BRCA2 (DNA Repair)" },
+    //     { value: "AKT1", label: "AKT1 (Signaling Pathway)" },
+    //     { value: "PIK3CA", label: "PIK3CA (Signaling Pathway)" },
+    //     { value: "VEGFA", label: "VEGFA (Angiogenesis)" },
+    //     { value: "LINC00152", label: "LINC00152 (lncRNA)" },
+    //     { value: "MALAT1", label: "MALAT1 (lncRNA)" },
+    //     { value: "HOTAIR", label: "HOTAIR (lncRNA)" },
+    //     { value: "miR-21", label: "miR-21 (miRNA)" },
+    //     { value: "miR-34a", label: "miR-34a (miRNA)" },
+    //     { value: "miR-155", label: "miR-155 (miRNA)" }
+    // ]
 
     // 选项卡配置
     const tabItems = [
@@ -68,48 +71,43 @@ const CeRNAVisualizationPage = () => {
             label: "Multi-hop Path Search",
             children: <PathSearchGraph />
         },
-        {
-            key: "network",
-            label: "Network Topology Graph",
-            children: <NetworkTopologyGraph data={networkData} />
-        },
-        {
-            key: "relationship",
-            label: "Node Relationship Graph",
-            children: <NodeRelationshipGraph data={relationshipData} />
-        },
-        {
-            key: "heatmap",
-            label: "Expression Heatmap",
-            children: <ExpressionHeatmap data={heatmapData} />
-        }
+        // Network Topology Graph（已禁用）
+        // {
+        //     key: "network",
+        //     label: "Network Topology Graph",
+        //     children: <NetworkTopologyGraph data={networkData} />
+        // },
+        // Node Relationship Graph（已禁用）
+        // {
+        //     key: "relationship",
+        //     label: "Node Relationship Graph",
+        //     children: <NodeRelationshipGraph data={relationshipData} />
+        // },
+        // Expression Heatmap（已禁用）
+        // {
+        //     key: "heatmap",
+        //     label: "Expression Heatmap",
+        //     children: <ExpressionHeatmap data={heatmapData} />
+        // }
     ]
 
-    // 加载示例数据
-    const loadSampleData = () => {
-        setLoading(true)
-        // 模拟API调用
-        setTimeout(() => {
-            // 实际项目中可以从API加载数据
-            // 这里使用组件的默认数据
-            setLoading(false)
-        }, 1000)
-    }
+    // 加载示例数据（已禁用）
+    // const loadSampleData = () => {
+    //     setLoading(true)
+    //     setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000)
+    // }
 
-    // 处理基因选择
-    const handleGeneChange = (value) => {
-        setSelectedGene(value)
-        // 这里可以添加联动逻辑，例如高亮所有可视化中的该基因
-        // 未来可以扩展为从API获取该基因的详细信息
-    }
+    // 处理基因选择（已禁用）
+    // const handleGeneChange = (value) => {
+    //     setSelectedGene(value)
+    // }
 
-    // 重置所有可视化
-    const resetAllVisualizations = () => {
-        setNetworkData(null)
-        setRelationshipData(null)
-        setHeatmapData(null)
-        setSelectedGene(null)
-    }
+    // 重置所有可视化（已禁用）
+    // const resetAllVisualizations = () => {
+    //     setSelectedGene(null)
+    // }
 
     return (
         <Box sx={{ padding: "24px", maxWidth: "1400px", margin: "0 auto" }}>
@@ -176,6 +174,7 @@ const CeRNAVisualizationPage = () => {
                     <Text strong>Performance optimized:</Text> Single query response &lt;2 seconds, max 500 nodes rendered, avoiding full 8M data loading.
                 </Paragraph>
 
+                {/* 操作按钮和基因搜索（已禁用）
                 <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>
                     <Col xs={24} md={12}>
                         <Space size="middle" style={{ width: "100%" }}>
@@ -208,7 +207,9 @@ const CeRNAVisualizationPage = () => {
                         </div>
                     </Col>
                 </Row>
+                */}
 
+                {/* 基因信息卡片（已禁用 - 依赖已禁用的可视化功能）
                 {selectedGene && (
                     <Card
                         size="small"
@@ -233,6 +234,7 @@ const CeRNAVisualizationPage = () => {
                         </Paragraph>
                     </Card>
                 )}
+                */}
             </Card>
 
             {/* 可视化选项卡 */}
@@ -284,6 +286,7 @@ const CeRNAVisualizationPage = () => {
                     </Card>
                 </Col>
             </Row>
+            {/* 三个已禁用可视化的描述卡片（已禁用）
             <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>
                 <Col xs={24} md={8}>
                     <Card title="Network Topology Graph Description" size="small">
@@ -327,6 +330,7 @@ const CeRNAVisualizationPage = () => {
                     </Card>
                 </Col>
             </Row>
+            */}
 
             {/* 使用说明 */}
             <Card style={{ marginTop: "24px" }} size="small">
@@ -347,7 +351,6 @@ const CeRNAVisualizationPage = () => {
                             <ul style={{ fontSize: "12px", paddingLeft: "20px" }}>
                                 <li>ceRNA Interaction Network connects to real backend API</li>
                                 <li>8+ million interactions from PostgreSQL database</li>
-                                <li>Other visualizations use simulated data for reference</li>
                                 <li>Supports filtering by species, database, interaction type</li>
                             </ul>
                         </Card>
@@ -355,9 +358,8 @@ const CeRNAVisualizationPage = () => {
                     <Col xs={24} sm={12} md={8}>
                         <Card size="small" title="Technical Notes">
                             <ul style={{ fontSize: "12px", paddingLeft: "20px" }}>
-                                <li>ceRNA Interaction: Cytoscape.js for complex networks</li>
-                                <li>Other visualizations: D3.js for custom graphics</li>
-                                <li>Uses Next.js + React framework</li>
+                                <li>Uses Cytoscape.js for complex network visualization</li>
+                                <li>Built with Next.js + React framework</li>
                                 <li>Responsive design, adapts to different screens</li>
                                 <li>Performance optimized for 8M+ data queries</li>
                             </ul>
@@ -369,8 +371,7 @@ const CeRNAVisualizationPage = () => {
             {/* 页脚说明 */}
             <Box sx={{ textAlign: "center", marginTop: "32px", padding: "16px", color: "#6b7280" }}>
                 <Paragraph style={{ fontSize: "12px" }}>
-                    ceRNAxis Visualization Tool v0.1.0 | This tool is for research and educational purposes |
-                    <Text code>Data is simulated for reference only</Text>
+                    ceRNAxis Visualization Tool v0.1.0 | This tool is for research and educational purposes
                 </Paragraph>
             </Box>
 

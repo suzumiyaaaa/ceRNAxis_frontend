@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { Box, Stack } from "@mui/system"
-import { Select, InputNumber, Slider, Button, Typography, Space, Divider, Spin, Input } from "antd"
+import { Select, /* InputNumber, Slider, */ Button, Typography, Space, /* Divider, */ Spin, Input } from "antd"
 import { FilterOutlined, ReloadOutlined } from "@ant-design/icons"
 import useFilterOptions from "./hooks/useFilterOptions"
 
@@ -14,18 +14,18 @@ const DatabaseFilter = ({ onFilterChange }) => {
         species: null,
         database: null,
         cerna_type: null,
-        disease: null,
-        regulate_type: null,
-        min_binding_score: null,
-        max_binding_score: null
+        // disease: null,
+        // regulate_type: null,
+        // min_binding_score: null,
+        // max_binding_score: null
     })
 
     const { options, loading } = useFilterOptions()
     const speciesOptions = options.species
     const databaseOptions = options.databases
     const cernaTypeOptions = options.cerna_types
-    const diseaseOptions = options.diseases
-    const regulateTypeOptions = options.regulate_types
+    // const diseaseOptions = options.diseases
+    // const regulateTypeOptions = options.regulate_types
 
     const handleFilterChange = (key, value) => {
         console.log('Filter change:', { key, value, currentFilters: filters })
@@ -42,43 +42,33 @@ const DatabaseFilter = ({ onFilterChange }) => {
 
         const newFilters = { ...filters, [key]: normalizedValue }
 
-        // 确保结合得分范围的有效性：min <= max
-        if (key === 'min_binding_score' || key === 'max_binding_score') {
-            // 获取当前的最小值和最大值
-            let minValue = key === 'min_binding_score' ? value : newFilters.min_binding_score
-            let maxValue = key === 'max_binding_score' ? value : newFilters.max_binding_score
-
-            // 只有当两个值都不是null时才进行交换检查
-            if (minValue !== null && maxValue !== null) {
-                // 转换值为数字
-                const minNum = typeof minValue === 'number' ? minValue : parseFloat(minValue)
-                const maxNum = typeof maxValue === 'number' ? maxValue : parseFloat(maxValue)
-
-                // 确保最小值不大于最大值
-                if (!isNaN(minNum) && !isNaN(maxNum) && minNum > maxNum) {
-                    console.log('Swapping values because min > max:', { minNum, maxNum })
-                    // 交换值：确保min <= max
-                    newFilters.min_binding_score = Math.min(minNum, maxNum)
-                    newFilters.max_binding_score = Math.max(minNum, maxNum)
-                }
-            }
-            // 如果其中一个为null，保持原样，表示无限制
-        }
+        // 确保结合得分范围的有效性：min <= max（已禁用Binding Score功能）
+        // if (key === 'min_binding_score' || key === 'max_binding_score') {
+        //     let minValue = key === 'min_binding_score' ? value : newFilters.min_binding_score
+        //     let maxValue = key === 'max_binding_score' ? value : newFilters.max_binding_score
+        //     if (minValue !== null && maxValue !== null) {
+        //         const minNum = typeof minValue === 'number' ? minValue : parseFloat(minValue)
+        //         const maxNum = typeof maxValue === 'number' ? maxValue : parseFloat(maxValue)
+        //         if (!isNaN(minNum) && !isNaN(maxNum) && minNum > maxNum) {
+        //             newFilters.min_binding_score = Math.min(minNum, maxNum)
+        //             newFilters.max_binding_score = Math.max(minNum, maxNum)
+        //         }
+        //     }
+        // }
 
         console.log('Setting new filters:', newFilters)
         setFilters(newFilters)
     }
 
-    const handleSliderChange = ([min, max]) => {
-        console.log('Slider changed:', { min, max, currentFilters: filters })
-        // Slider直接设置两个值，确保它们有效
-        const newFilters = {
-            ...filters,
-            min_binding_score: min,
-            max_binding_score: max
-        }
-        setFilters(newFilters)
-    }
+    // const handleSliderChange = ([min, max]) => {
+    //     console.log('Slider changed:', { min, max, currentFilters: filters })
+    //     const newFilters = {
+    //         ...filters,
+    //         min_binding_score: min,
+    //         max_binding_score: max
+    //     }
+    //     setFilters(newFilters)
+    // }
 
     const handleApplyFilters = () => {
         onFilterChange(filters)
@@ -91,10 +81,10 @@ const DatabaseFilter = ({ onFilterChange }) => {
             species: null,
             database: null,
             cerna_type: null,
-            disease: null,
-            regulate_type: null,
-            min_binding_score: null,
-            max_binding_score: null
+            // disease: null,
+            // regulate_type: null,
+            // min_binding_score: null,
+            // max_binding_score: null
         }
         setFilters(resetFilters)
         onFilterChange(resetFilters)
@@ -221,7 +211,7 @@ const DatabaseFilter = ({ onFilterChange }) => {
                     </Select>
                 </Box>
 
-                {/* 疾病筛选 */}
+                {/* 疾病筛选（已禁用）
                 <Box>
                     <Text strong style={{ marginBottom: 8, display: 'block' }}>
                         Disease
@@ -240,8 +230,9 @@ const DatabaseFilter = ({ onFilterChange }) => {
                         ))}
                     </Select>
                 </Box>
+                */}
 
-                {/* 调控类型筛选 */}
+                {/* 调控类型筛选（已禁用）
                 <Box>
                     <Text strong style={{ marginBottom: 8, display: 'block' }}>
                         Regulation Type
@@ -260,10 +251,10 @@ const DatabaseFilter = ({ onFilterChange }) => {
                         ))}
                     </Select>
                 </Box>
+                */}
 
+                {/* 结合得分筛选（已禁用）
                 <Divider />
-
-                {/* 结合得分筛选 */}
                 <Box>
                     <Text strong style={{ marginBottom: 16, display: 'block' }}>
                         Binding Score Range
@@ -300,6 +291,7 @@ const DatabaseFilter = ({ onFilterChange }) => {
                         />
                     </Stack>
                 </Box>
+                */}
 
                 {/* 筛选操作按钮 */}
                 <Box>

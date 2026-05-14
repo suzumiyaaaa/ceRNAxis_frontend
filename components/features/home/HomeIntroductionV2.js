@@ -27,9 +27,9 @@ const HomeIntroduction = ({  }) => (
                         <Box component='span' sx={{ color: '#2978ef', fontWeight: 'bold' }}>ceRNAxis</Box>
                     </Box>
                     <Box component='h6' sx={{fontSize: '20px', paddingBottom: '12px', fontWeight: '400', lineHeight: '1.5'}}>
-                        ceRNA Database curates and functionally annotates over <strong>1,345,678</strong> ceRNA interactions and <strong>2,345,432</strong> metadata
-                         from <strong>512</strong> datasets, <strong>98,654</strong> samples, <strong>1,234,567</strong> tissues, and <strong>345,678</strong> individual cells, spanning <strong>56</strong> RNA-related
-                          diseases and <strong>12</strong> cancer types from <strong>6</strong> major data sources and <strong>35</strong> research initiatives and institutions.
+                        ceRNA Database curates and functionally annotates over <strong>8,008,329</strong> ceRNA interactions
+                         (miRNA-mRNA and miRNA-lncRNA) spanning <strong>Homo sapiens</strong>, integrated from <strong>7</strong> major data sources
+                          including miRWalk, RNAInter, miRDB, miRTarBase, NPInter, TargetSCAN, and ENCORI.
                     </Box>
                 </Stack>
                 <Stack direction="row" spacing={2}>
